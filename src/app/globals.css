@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+/* ---------- Theme: richer greens, warm cream, softer shadows & rounder corners ---------- */
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-neutral-50: #fbf8f2;
+  --color-emerald-50: #effaf4;
+  --color-emerald-100: #d6f3e2;
+  --color-emerald-500: #1fb36b;
+  --color-emerald-600: #12985a;
+  --color-emerald-700: #0d7a49;
+  --radius-xl: 1.1rem;
+  --radius-2xl: 1.5rem;
+  --shadow-sm: 0 1px 2px rgba(20, 60, 40, 0.04), 0 10px 28px -12px rgba(20, 70, 45, 0.18);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  color: #17261e;
+  background-color: #fbf8f2;
+  background-image:
+    radial-gradient(55rem 28rem at 8% -8%, #d6f3e2 0%, transparent 60%),
+    radial-gradient(45rem 26rem at 108% 6%, #ffe8c4 0%, transparent 55%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes fade-up { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes pop-in { 0% { opacity: 0; transform: scale(0.88); } 70% { transform: scale(1.03); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes float { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-18px) rotate(5deg); } }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@keyframes glow { 0%, 100% { box-shadow: 0 8px 24px -6px rgba(18, 152, 90, 0.55); } 50% { box-shadow: 0 8px 34px 2px rgba(18, 152, 90, 0.8); } }
+@keyframes drift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+/* ---------- Page choreography: every page's content glides in, staggered ---------- */
+main > *, main li, main article {
+  animation: fade-up 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+main > :nth-child(2), main li:nth-child(2), main article:nth-child(2) { animation-delay: 0.06s; }
+main > :nth-child(3), main li:nth-child(3), main article:nth-child(3) { animation-delay: 0.12s; }
+main > :nth-child(4), main li:nth-child(4), main article:nth-child(4) { animation-delay: 0.18s; }
+main > :nth-child(5), main li:nth-child(5), main article:nth-child(5) { animation-delay: 0.24s; }
+main > :nth-child(n+6), main li:nth-child(n+6), main article:nth-child(n+6) { animation-delay: 0.3s; }
+
+/* ---------- Micro-interactions ---------- */
+button, a { transition: transform 0.18s ease, box-shadow 0.25s ease, background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease; }
+button:not(:disabled):active, a:active { transform: scale(0.96); }
+main a.rounded-2xl:hover, main article:hover { transform: translateY(-3px); box-shadow: 0 18px 38px -16px rgba(13, 122, 73, 0.4); }
+button.bg-emerald-600 {
+  background-image: linear-gradient(135deg, #1fb36b, #0d8f54);
+  box-shadow: 0 10px 22px -10px rgba(18, 152, 90, 0.7);
+}
+button.bg-emerald-600:not(:disabled):hover { transform: translateY(-1px); box-shadow: 0 14px 26px -10px rgba(18, 152, 90, 0.85); }
+input:focus, select:focus { box-shadow: 0 0 0 3px rgba(31, 179, 107, 0.18); }
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] > summary { margin-bottom: 0.25rem; }
+
+/* ---------- Reusable utility classes ---------- */
+.bg-brand { background-image: linear-gradient(135deg, #25c07a 0%, #0d8f54 100%); }
+.bg-hero { background-image: linear-gradient(135deg, #1fb36b 0%, #0b7a4a 55%, #075e3a 100%); }
+.glass { background: rgba(255, 255, 255, 0.78); backdrop-filter: blur(16px) saturate(1.4); border: 1px solid rgba(255, 255, 255, 0.7); }
+.glow { animation: glow 2.6s ease-in-out infinite; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-pop { animation: pop-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.skeleton {
+  border-radius: 1.25rem;
+  background: linear-gradient(90deg, #ece7dc 25%, #f7f3ea 50%, #ece7dc 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+.bg-drift { background-image: linear-gradient(120deg, #d6f3e2, #fff0d2, #cdeedd, #ffe3c2); background-size: 300% 300%; animation: drift 14s ease infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
