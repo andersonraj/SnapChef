@@ -173,7 +173,7 @@ supabase/
 
 | Problem | Fix |
 |---|---|
-| Login button does nothing / page reloads to `/login?` | The address you're using isn't in `allowedDevOrigins` in `next.config.ts`. Add it and restart the dev server. |
+| Login button does nothing and page reloads to `/login?` | The address you're using isn't in `allowedDevOrigins` in `next.config.ts`. Add it and restart the dev server. |
 | "Invalid login credentials" | The email/password doesn't match an account. Check **Supabase → Authentication → Users**, or create a new account. |
 | "Email not confirmed" | Turn off **Confirm email** in Supabase (Setup step 2.4). |
 | Scan or recipes fail | Check the terminal for `Scan failed:` or `Recipe generation failed:`. Common causes: wrong `GEMINI_API_KEY`, a retired model name in `GEMINI_MODEL`, or free-tier rate limits (wait a minute). |
